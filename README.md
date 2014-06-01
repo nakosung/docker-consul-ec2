@@ -1,7 +1,7 @@
 docker-consul-ec2
 =================
 
-consul quorum
+Consul quorum
 --------------------
   - deploy 3 t1 instances
 ```
@@ -20,3 +20,14 @@ consul agent -server -bootstrap -data-dir=/tmp/consul
 consul agent -server -data-dir=/tmp/consul -join=$(ANY_OTHER_SERVER_IP)
 ```
  - and then kill leader node, re-start the node as an ordinary follower node.
+
+Working node
+-------------------
+```
+nohup consul agent -data-dir=/tmp/consul -config-dir=/etc/consul.d > /var/log/consul.log 2> &1 &
+```
+- ```kill -1 $(CONSUL_PID)``` to refresh consul service definitions
+
+Nginx health check
+------------------
+```curl -sS -o /dev/null http://localhost:80```
