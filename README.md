@@ -36,3 +36,6 @@ Checking nginx health
 ------------------
 ```curl -sS -o /dev/null http://localhost:80```
 
+Utilizing docker net-host mode(>=0.11.0)
+--------------------------------
+```docker run --net=host configuration...```
