@@ -3,6 +3,7 @@ docker-consul-ec2
 
 Install consul on each ec2 node
 --------------
+* Make sure that security group permits inbound TCP/UDP from same sg.
 ```
 sudo apt-get install unzip
 curl -OL https://dl.bintray.com/mitchellh/consul/0.2.1_linux_amd64.zip
