@@ -39,3 +39,11 @@ Checking nginx health
 Utilizing docker net-host mode(>=0.11.0)
 --------------------------------
 ```docker run --net=host configuration...```
+
+Consul as DNS
+-------------
+```
+apt-get install dnsmasqd
+echo "server=/consul/127.0.0.1#8600" > /etc/dnsmasq.d/10-consul
+service dnsmasq force-reload
+```
