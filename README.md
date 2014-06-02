@@ -7,6 +7,7 @@ awscli
 ```
 sudo easy-install pip
 sudo pip install awscli
+aws configure
 ```
 
 Install consul on each ec2 node
