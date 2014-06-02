@@ -1,6 +1,14 @@
 docker-consul-ec2
 =================
 
+awscli
+------
+* requires pip
+```
+sudo easy-install pip
+sudo pip install awscli
+```
+
 Install consul on each ec2 node
 --------------
 * Make sure that security group permits inbound TCP/UDP from same sg.
