@@ -28,7 +28,7 @@ consul agent -server -data-dir=/tmp/consul -join=$(ANY_OTHER_SERVER_IP)
 Working node
 -------------------
 ```
-nohup consul agent -data-dir=/tmp/consul -config-dir=/etc/consul.d > /var/log/consul.log 2> &1 &
+nohup consul agent -data-dir=/tmp/consul -config-dir=/etc/consul.d > /var/log/consul.log 2>&1 &
 ```
 - ```kill -1 $(CONSUL_PID)``` to refresh consul service definitions
 
@@ -43,7 +43,7 @@ Utilizing docker net-host mode(>=0.11.0)
 Consul as DNS
 -------------
 ```
-apt-get install dnsmasqd
+apt-get install dnsmasq
 echo "server=/consul/127.0.0.1#8600" > /etc/dnsmasq.d/10-consul
 service dnsmasq force-reload
 ```
