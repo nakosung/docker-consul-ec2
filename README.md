@@ -78,11 +78,13 @@ chmod +x /usr/bin/consul_port
 ```
 # For clients
 mkdir -p /tmp/consul
+mkdir -p /etc/consul.d
+mkdir -p /var/consul
 cat > /etc/init/consul.conf << CONSUL_CONF_END
 start on started tty1
 respawn
 script
-   consul agent -data-dir /tmp/consul -join $(ec2_tag CONSUL_JOIN)
+   consul agent -data-dir /var/consul -config-dir /etc/consul.d -join $(ec2_tag CONSUL_JOIN)
 end script
 CONSUL_CONF_END
 start consul
