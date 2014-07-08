@@ -17,7 +17,7 @@ Create AMI Role to retrieve tag information within ec2-instances
 }
 ```
 
-Install docker and consul on each ec2 node (ubuntu 14.04 LTS)
+Install docker and consul on ec2 instances (ubuntu 14.04 LTS)
 --------------
 * Make sure that security group permits inbound TCP/UDP from same sg.
 * Let an instance have IAM role created above.
