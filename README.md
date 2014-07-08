@@ -14,11 +14,33 @@ Install consul on each ec2 node
 --------------
 * Make sure that security group permits inbound TCP/UDP from same sg.
 ```
-sudo apt-get install unzip
-curl -OL https://dl.bintray.com/mitchellh/consul/0.2.1_linux_amd64.zip
-unzip *
-chmod +x consul
-cp consul /usr/local/bin
+#!/bin/bash
+
+apt-get update
+apt-get -y install unzip
+
+# Install latest docker
+curl -s https://get.docker.io/ubuntu/ | sudo sh
+
+# Install docker & consul
+mkdir -p /tmp/consul
+pushd /tmp/consul
+wget https://dl.bintray.com/mitchellh/consul/0.3.0_linux_amd64.zip
+unzip *.zip
+mv -f consul /usr/bin
+popd
+rm -rf /tmp/consul
+
+mkdir -p /tmp/consul
+cat > /etc/init/consul.conf << CONSUL_CONF_END
+start on started tty1
+respawn
+script
+   consul agent -data-dir /tmp/consul -join 172.31.27.98
+end script
+CONSUL_CONF_END
+
+start consul
 ```
 
 Consul quorum
@@ -45,13 +67,6 @@ Checking nginx health
 ------------------
 ```curl -sS -o /dev/null http://localhost:80```
 
-Install docker
---------------
-```
-sudo apt-get update -y
-sudo apt-get install -y docker.io
-# update
-```
 
 Utilizing docker net-host mode(>=0.11.0)
 --------------------------------
