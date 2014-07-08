@@ -50,6 +50,17 @@ rm -rf /tmp/consul
 apt-get install python-pip -y
 pip install awscli
 
+# ec2_tag 
+cat > /usr/bin/ec2_tag << 'EC2_TAG_END'
+#!/bin/sh
+TAG_NAME=$1
+INSTANCE_ID="`wget -qO- http://instance-data/latest/meta-data/instance-id`"
+REGION="`wget -qO- http://instance-data/latest/meta-data/placement/availability-zone | sed -e 's:\([0-9][0-9]*\)[a-z]*\$:\\1:'`"
+TAG_VALUE="`aws ec2 describe-tags --filters "Name=resource-id,Values=$INSTANCE_ID" "Name=key,Values=$TAG_NAME" --region $REGION --output=text | cut -f5`"
+echo $TAG_VALUE
+EC2_TAG_END
+chmod +x /usr/bin/ec2_tag
+
 # For clients
 mkdir -p /tmp/consul
 cat > /etc/init/consul.conf << CONSUL_CONF_END
