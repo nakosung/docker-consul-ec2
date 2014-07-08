@@ -51,7 +51,7 @@ rm -rf /tmp/consul
 apt-get install python-pip -y
 pip install awscli
 
-# ec2_tag 
+# ec2_tag (http://stackoverflow.com/questions/3883315/query-ec2-tags-from-within-instance)
 cat > /usr/bin/ec2_tag << 'EC2_TAG_END'
 #!/bin/sh
 TAG_NAME=$1
