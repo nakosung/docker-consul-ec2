@@ -1,14 +1,6 @@
 docker-consul-ec2
 =================
 
-awscli
-------
-* requires pip
-```
-sudo easy-install pip
-sudo pip install awscli
-aws configure
-```
 
 Create AMI Role to retrieve tag information within ec2-instances
 -------------
@@ -103,12 +95,6 @@ consul agent -server -data-dir=/tmp/consul -join=$(ANY_OTHER_SERVER_IP)
 ```
  - and then kill leader node, re-start the node as an ordinary follower node.
 
-Working node
--------------------
-```
-nohup consul agent -data-dir=/tmp/consul -config-dir=/etc/consul.d > /var/log/consul.log 2>&1 &
-```
-- ```kill -1 $(CONSUL_PID)``` to refresh consul service definitions
 
 Checking nginx health
 ------------------
