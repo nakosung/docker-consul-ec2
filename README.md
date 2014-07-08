@@ -80,7 +80,7 @@ chmod +x /usr/bin/consul_port
 mkdir -p /tmp/consul
 mkdir -p /etc/consul.d
 mkdir -p /var/consul
-cat > /etc/init/consul.conf << CONSUL_CONF_END
+cat > /etc/init/consul.conf << 'CONSUL_CONF_END'
 start on started tty1
 respawn
 script
