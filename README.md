@@ -10,6 +10,21 @@ sudo pip install awscli
 aws configure
 ```
 
+Create AMI Role to retrieve tag information within ec2-instances
+-------------
+```
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {    
+      "Effect": "Allow",
+      "Action": [ "ec2:DescribeTags"],
+      "Resource": ["*"]
+    }
+  ]
+}
+```
+
 Install docker and consul on each ec2 node (ubuntu 14.04 LTS)
 --------------
 * Make sure that security group permits inbound TCP/UDP from same sg.
@@ -31,12 +46,17 @@ mv -f consul /usr/bin
 popd
 rm -rf /tmp/consul
 
+# Install AWS-CLI
+apt-get install python-pip -y
+pip install awscli
+
+# For clients
 mkdir -p /tmp/consul
 cat > /etc/init/consul.conf << CONSUL_CONF_END
 start on started tty1
 respawn
 script
-   consul agent -data-dir /tmp/consul -join 172.31.27.98
+   consul agent -data-dir /tmp/consul -join YOUR_CONSUL_SERVER_PRIVATE_IP
 end script
 CONSUL_CONF_END
 
