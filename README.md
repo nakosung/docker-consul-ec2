@@ -10,7 +10,7 @@ sudo pip install awscli
 aws configure
 ```
 
-Install consul on each ec2 node
+Install docker and consul on each ec2 node (ubuntu 14.04 LTS)
 --------------
 * Make sure that security group permits inbound TCP/UDP from same sg.
 ```
@@ -22,7 +22,7 @@ apt-get -y install unzip
 # Install latest docker
 curl -s https://get.docker.io/ubuntu/ | sudo sh
 
-# Install docker & consul
+# Install consul
 mkdir -p /tmp/consul
 pushd /tmp/consul
 wget https://dl.bintray.com/mitchellh/consul/0.3.0_linux_amd64.zip
