@@ -62,16 +62,27 @@ echo $TAG_VALUE
 EC2_TAG_END
 chmod +x /usr/bin/ec2_tag
 
+# consul_ip
+cat > /usr/bin/consul_ip << 'CONSUL_IP_END'
+dig @127.0.0.1 -p 8600 +short $1
+CONSUL_IP_END
+chmod +x /usr/bin/consul_ip
+
+# consul_port
+cat > /usr/bin/consul_port << 'CONSUL_PORT_END'
+dig @127.0.0.1 -p 8600 SRV +short $1 | awk '{print $3}'
+CONSUL_PORT_END
+chmod +x /usr/bin/consul_port
+
 # For clients
 mkdir -p /tmp/consul
 cat > /etc/init/consul.conf << CONSUL_CONF_END
 start on started tty1
 respawn
 script
-   consul agent -data-dir /tmp/consul -join YOUR_CONSUL_SERVER_PRIVATE_IP
+   consul agent -data-dir /tmp/consul -join $(ec2_tag CONSUL_JOIN)
 end script
 CONSUL_CONF_END
-
 start consul
 ```
 
