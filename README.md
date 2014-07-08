@@ -73,7 +73,9 @@ cat > /usr/bin/consul_port << 'CONSUL_PORT_END'
 dig @127.0.0.1 -p 8600 SRV +short $1 | awk '{print $3}'
 CONSUL_PORT_END
 chmod +x /usr/bin/consul_port
+```
 
+```
 # For clients
 mkdir -p /tmp/consul
 cat > /etc/init/consul.conf << CONSUL_CONF_END
